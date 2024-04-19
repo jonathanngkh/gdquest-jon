@@ -1,6 +1,6 @@
 res://default_env.tres
 res://completed_project.tscn
 res://addons/godot_tours/ui/theme_welcome_menu.tres
+res://godot_tours.tres
 res://levels/rooms/tileset_invisible_walls.tres
 res://levels/rooms/floating_dungeon_tileset.tres
-res://godot_tours.tres
