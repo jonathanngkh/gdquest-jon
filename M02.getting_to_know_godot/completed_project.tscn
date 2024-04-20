@@ -70,7 +70,6 @@ terrain_set_0/terrain_0/color = Color(0.219608, 0.172549, 0.647059, 1)
 sources/0 = SubResource("TileSetAtlasSource_po4yl")
 
 [node name="Main" type="Node2D"]
-visible = false
 script = ExtResource("1_25vm7")
 
 [node name="Bridges" type="TileMap" parent="."]

@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfrp0km2xjcr6"]
+[gd_scene load_steps=10 format=3 uid="uid://dfrp0km2xjcr6"]
 
 [ext_resource type="Script" path="res://game.gd" id="2"]
 [ext_resource type="TileSet" uid="uid://crkgfdw1y80hc" path="res://levels/rooms/tileset_bridges.tres" id="2_vnf5n"]
 [ext_resource type="TileSet" uid="uid://cqb2wtrubw0n6" path="res://levels/rooms/tileset_invisible_walls.tres" id="3"]
+[ext_resource type="PackedScene" uid="uid://dds7yrrx56gcy" path="res://player/player.tscn" id="4_ov4j0"]
+[ext_resource type="PackedScene" uid="uid://cu2rb5dl4ljte" path="res://levels/rooms/room_a.tscn" id="5_cm1tg"]
+[ext_resource type="PackedScene" uid="uid://dgayuh42w4v6u" path="res://levels/rooms/room_b.tscn" id="6_0rew6"]
+[ext_resource type="PackedScene" uid="uid://cq0mmphkbrvmm" path="res://levels/rooms/room_c.tscn" id="7_357nr"]
+[ext_resource type="PackedScene" uid="uid://wdey00p3syru" path="res://levels/background/background_blue_sky.tscn" id="8_r4r0q"]
+[ext_resource type="PackedScene" uid="uid://cce7r30dfjm4r" path="res://interface/bars/ui_health_bar.tscn" id="9_s2p6e"]
 
 [node name="Start" type="Node2D"]
 script = ExtResource("2")
@@ -11,10 +17,36 @@ script = ExtResource("2")
 tile_set = ExtResource("2_vnf5n")
 format = 2
 layer_0/name = "Bridges"
+layer_0/tile_data = PackedInt32Array(524285, 65536, 1, 524286, 131072, 1, 524287, 196608, 1, 458752, 65536, 1, 458753, 0, 1, 458754, 131072, 1, 131082, 262144, 1, 65546, 196608, 1, 10, 196608, 1, -65526, 196608, 1, -131062, 327680, 1, 9, 262144, 1, 11, 262144, 1, 589822, 327680, 1, 458750, 131072, 0, 393214, 196608, 1, 655358, 131072, 0, 458751, 0, 0, 589823, 196608, 1, 327678, 327680, 1, 720894, 262144, 1, 393215, 262144, 1, 655359, 196608, 0, 393216, 131072, 1, 524288, 262144, 1)
 metadata/_edit_lock_ = true
 
 [node name="InvisibleWalls" type="TileMap" parent="."]
 tile_set = ExtResource("3")
 format = 2
 layer_0/name = "Invisible walls"
+layer_0/tile_data = PackedInt32Array(262142, 0, 0, 262143, 0, 0, 327679, 0, 0, 327680, 0, 0, 786430, 0, 0, 720895, 0, 0, 589824, 0, 0, 524289, 0, 0, 393217, 0, 0, 65545, 0, 0, 8, 0, 0, -65527, 0, 0, -65525, 0, 0, 65547, 0, 0, 12, 0, 0)
 metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("4_ov4j0")]
+position = Vector2(-1408, 640)
+
+[node name="RoomA" parent="." instance=ExtResource("5_cm1tg")]
+position = Vector2(-1792, 384)
+
+[node name="RoomB" parent="." instance=ExtResource("6_0rew6")]
+position = Vector2(384, 384)
+
+[node name="RoomC" parent="." instance=ExtResource("7_357nr")]
+position = Vector2(128, -1664)
+
+[node name="BackgroundBlueSky" parent="." instance=ExtResource("8_r4r0q")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIHealthBar" parent="CanvasLayer" instance=ExtResource("9_s2p6e")]
+offset_left = 60.0
+offset_top = 60.0
+offset_right = 378.0
+offset_bottom = 132.725
+
+[connection signal="health_changed" from="Player" to="CanvasLayer/UIHealthBar" method="_on_player_health_changed"]

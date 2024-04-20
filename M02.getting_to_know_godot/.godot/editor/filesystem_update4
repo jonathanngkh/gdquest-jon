@@ -4,3 +4,10 @@ res://addons/godot_tours/ui/theme_welcome_menu.tres
 res://godot_tours.tres
 res://levels/rooms/tileset_invisible_walls.tres
 res://levels/rooms/floating_dungeon_tileset.tres
+res://player/player.tscn
+res://start.tscn
+res://levels/rooms/tileset_bridges.tres
+res://interface/bars/ui_health_bar.gd
+res://levels/rooms/room_a.tscn
+res://levels/rooms/chests/chest.tscn
+res://levels/rooms/chests/chest.gd
