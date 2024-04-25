@@ -1,7 +1,14 @@
 extends Sprite2D
 
-var max_speed := 600
+var normal_speed := 600
+var max_speed = normal_speed
+var boost_speed := 1500
 var velocity := Vector2.ZERO
+var min_factor := 1.0
+var max_factor := 60.0
+var steering_factor := clampf(5.0, min_factor, max_factor)
+
+@onready var boost_duration_timer: Timer = $BoostDurationTimer
 
 func _process(delta: float) -> void:
 	var direction := Vector2.ZERO
@@ -11,6 +18,23 @@ func _process(delta: float) -> void:
 	if direction.length() > 1.0:
 		direction = direction.normalized()
 
-	velocity = direction * max_speed
+	var desired_velocity = max_speed * direction
+	var steering_vector = desired_velocity - velocity
+	velocity += steering_vector * steering_factor * delta
+	
+	if Input.is_action_just_pressed("boost"):
+		max_speed = boost_speed
+		boost_duration_timer.start()
 	position += velocity * delta
-	rotation = velocity.angle()
+	
+	if direction != Vector2.ZERO:
+	# if direction.length() > 0.0: alternative
+		rotation = velocity.angle()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	pass
+
+
+func _on_boost_duration_timer_timeout() -> void:
+	max_speed = normal_speed
