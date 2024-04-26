@@ -10,6 +10,9 @@ var steering_factor := clampf(5.0, min_factor, max_factor)
 
 @onready var boost_duration_timer: Timer = $BoostDurationTimer
 
+signal boost_started
+signal boost_ended
+
 func _process(delta: float) -> void:
 	var direction := Vector2.ZERO
 	direction.x = Input.get_axis("move_left", "move_right")
@@ -25,6 +28,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("boost"):
 		max_speed = boost_speed
 		boost_duration_timer.start()
+		emit_signal("boost_started")
+		
 	position += velocity * delta
 	
 	if direction != Vector2.ZERO:
@@ -32,9 +37,6 @@ func _process(delta: float) -> void:
 		rotation = velocity.angle()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	pass
-
-
 func _on_boost_duration_timer_timeout() -> void:
 	max_speed = normal_speed
+	emit_signal("boost_ended")

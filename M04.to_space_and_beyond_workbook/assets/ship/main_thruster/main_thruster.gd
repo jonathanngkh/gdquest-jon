@@ -10,6 +10,10 @@ extends Line2D
 # We use curves to control the size and opacity of the thruster flame.
 # Curves are a tool provided by Godot that lets us map a value to another value.
 # For example, the size curve maps the position along the thruster to a given thickness.
+var orange_flame_gradient = preload("res://lessons/orange_flame_gradient_texture.tres")
+var blue_flame_gradient = preload("res://lessons/blue_flame_gradient_texture.tres")
+@onready var ship: Sprite2D = $".."
+
 @export var size_curve: Curve
 @export var alpha_curve: Curve
 @export var max_length := 160.0
@@ -47,6 +51,8 @@ var _do_redraw := false
 
 
 func _ready() -> void:
+	print(orange_flame_gradient.gradient.colors)
+	print(blue_flame_gradient.gradient.colors)
 	_update_drawing()
 	gpu_particles_2d.emitting = Engine.is_editor_hint()
 	if not Engine.is_editor_hint():
@@ -62,6 +68,16 @@ If you don't want to change the action names, you will need to change the action
 			if not InputMap.has_action(action):
 				print_rich(MESSAGE % [action, ", ".join(REQUIRED_ACTIONS)])
 			assert(InputMap.has_action(action), ERROR_STUB % [action, ", ".join(REQUIRED_ACTIONS)])
+	
+	ship.connect("boost_started", _on_ship_boost_started)
+	ship.connect("boost_ended", _on_ship_boost_ended)
+
+
+func _on_ship_boost_started() -> void:
+	pass
+
+func _on_ship_boost_ended() -> void:
+	pass
 
 
 func _process(delta: float) -> void:
