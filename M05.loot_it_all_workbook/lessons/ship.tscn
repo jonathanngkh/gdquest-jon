@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmv50krf4bo5r"]
+[gd_scene load_steps=6 format=3 uid="uid://dmv50krf4bo5r"]
 
 [ext_resource type="Texture2D" uid="uid://bniyrxn3r2v8h" path="res://assets/ship.png" id="3_pdppw"]
 [ext_resource type="Script" path="res://lessons/ship.gd" id="4_p1sls"]
 [ext_resource type="PackedScene" uid="uid://dgf54k70yiiff" path="res://assets/ship_visual_effects/main_thruster/main_thruster.tscn" id="5_q7c3l"]
 [ext_resource type="PackedScene" uid="uid://bklom8bhpxg4h" path="res://assets/ship_visual_effects/side_thruster/side_thruster.tscn" id="6_1updt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcifr"]
+bg_color = Color(0.996078, 0, 0.231373, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Ship" type="Area2D"]
 script = ExtResource("4_p1sls")
@@ -25,3 +32,19 @@ rotation = 1.36715
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-8, -40, 40, 0, -8, 40, -32, 24, -32, -24)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = -72.0
+offset_right = 56.0
+offset_bottom = -53.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_lcifr")
+value = 50.0
+show_percentage = false
