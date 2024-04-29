@@ -36,5 +36,9 @@ func _process(delta: float) -> void:
 
 
 func _on_area_entered(area_that_entered: Area2D) -> void:
-	energy += 20.0
-	get_node("UI/EnergyBar").value = energy
+	if area_that_entered.is_in_group("energy"):
+		energy += 20.0
+		get_node("UI/EnergyBar").value = energy
+	if area_that_entered.is_in_group("coin"):
+		coins += 1
+		$UI/CoinsCount.text = "x" + str(coins)
