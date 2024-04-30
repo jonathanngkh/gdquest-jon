@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dyuyrxbs50h61"]
 
 [ext_resource type="PackedScene" path="res://practices/L7.P1.spawn_random_items/random_collectible_placer.tscn" id="1_v614n"]
-[ext_resource type="Script" path="res://practices/L7.P1.spawn_random_items/random_collectible_placer.gd" id="2_wvtf4"]
 
 [node name="SpawnRandomItems" type="Node2D"]
 
-[node name="RandomCollectiblePlacer" type="Node2D" parent="." instance=ExtResource("1_v614n")]
+[node name="RandomCollectiblePlacer" parent="." instance=ExtResource("1_v614n")]
 position = Vector2(960, 540)
-script = ExtResource("2_wvtf4")
 
 [node name="ExtraVisuals" type="Node" parent="."]
 
@@ -25,3 +23,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.219608, 0.317647, 0.776471, 1)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

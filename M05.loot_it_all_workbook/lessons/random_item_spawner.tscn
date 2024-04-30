@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://36ocvuw4kad0"]
+
+[ext_resource type="Script" path="res://lessons/random_item_spawner.gd" id="1_kmq81"]
+
+[node name="RandomItemSpawner" type="Node2D"]
+script = ExtResource("1_kmq81")
+
+[node name="Timer" type="Timer" parent="."]
