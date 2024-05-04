@@ -53,7 +53,7 @@ func _on_mouse_exited() -> void:
 	var tween = create_tween()
 	var from_thickness := 6.0
 	var to_thickness := 3.0
-	var tween_duration := 0.08
+	var tween_duration := 0.07
 	#if not is_open:
 	tween.tween_method(set_outline_thickness, from_thickness, to_thickness, tween_duration)
 
