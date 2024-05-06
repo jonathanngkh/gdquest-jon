@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://0i1g0cunmseb"]
+[gd_scene load_steps=7 format=3 uid="uid://0i1g0cunmseb"]
 
 [ext_resource type="Script" path="res://lessons/items/item.gd" id="1_xf7tg"]
 [ext_resource type="Texture2D" uid="uid://bayg35bajtsiq" path="res://lessons/items/apple.png" id="2_47kmu"]
 [ext_resource type="PackedScene" uid="uid://bdooawbxdlh2s" path="res://assets/sparks_particles.tscn" id="3_0inye"]
+[ext_resource type="Shader" path="res://lessons/chest/group_outline.gdshader" id="3_7ni6r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63pc6"]
 radius = 25.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6phik"]
+shader = ExtResource("3_7ni6r")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 3.0
+shader_parameter/viewport_scale = Vector2(1, 1)
 
 [node name="Apple" type="Area2D" groups=["gem"]]
 collision_layer = 2
@@ -15,9 +22,12 @@ script = ExtResource("1_xf7tg")
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_63pc6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sparks" parent="." instance=ExtResource("3_0inye")]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_6phik")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(0, -8)
 scale = Vector2(0.729167, 0.729167)
 texture = ExtResource("2_47kmu")
-
-[node name="Sparks" parent="." instance=ExtResource("3_0inye")]

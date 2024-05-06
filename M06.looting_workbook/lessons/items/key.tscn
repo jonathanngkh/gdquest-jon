@@ -1,20 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctqyr0ufyoktk"]
+[gd_scene load_steps=7 format=3 uid="uid://ctqyr0ufyoktk"]
 
 [ext_resource type="Script" path="res://lessons/items/item.gd" id="1_ahuk5"]
 [ext_resource type="Texture2D" uid="uid://cncnriir6hyt1" path="res://lessons/items/key.png" id="2_3sght"]
 [ext_resource type="PackedScene" uid="uid://bdooawbxdlh2s" path="res://assets/sparks_particles.tscn" id="3_jeltk"]
+[ext_resource type="Shader" path="res://lessons/chest/group_outline.gdshader" id="3_s4vae"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2nj2t"]
 radius = 34.0147
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfiu4"]
+shader = ExtResource("3_s4vae")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 3.0
+shader_parameter/viewport_scale = Vector2(1, 1)
 
 [node name="Key" type="Area2D" groups=["healing_item"]]
 collision_layer = 2
 script = ExtResource("1_ahuk5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_3sght")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2nj2t")
 
 [node name="Sparks" parent="." instance=ExtResource("3_jeltk")]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_cfiu4")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+texture = ExtResource("2_3sght")
