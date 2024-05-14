@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dw2nss4jdlxfy"
+path="res://.godot/imported/High E.mp3-09a855d781d0bb24451cc67d2951fa27.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/High E.mp3"
+dest_files=["res://.godot/imported/High E.mp3-09a855d781d0bb24451cc67d2951fa27.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

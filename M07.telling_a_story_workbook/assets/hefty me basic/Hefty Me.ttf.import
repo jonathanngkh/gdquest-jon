@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://bds5a28crinjl"
+path="res://.godot/imported/Hefty Me.ttf-5f89cd2b8cb672ed06c41309cc9b6bc4.fontdata"
+
+[deps]
+
+source_file="res://assets/hefty me basic/Hefty Me.ttf"
+dest_files=["res://.godot/imported/Hefty Me.ttf-5f89cd2b8cb672ed06c41309cc9b6bc4.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

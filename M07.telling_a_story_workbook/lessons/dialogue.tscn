@@ -1,7 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://kras5m3ptiwj"]
+[gd_scene load_steps=15 format=3 uid="uid://kras5m3ptiwj"]
 
-[ext_resource type="Texture2D" uid="uid://ogu21ixgdm50" path="res://assets/test.svg" id="1_7u0au"]
+[ext_resource type="Theme" uid="uid://bhk78dvw2v8ao" path="res://lessons/main_theme.tres" id="1_7nwt5"]
 [ext_resource type="Script" path="res://lessons/dialogue.gd" id="1_bed18"]
+[ext_resource type="Shader" path="res://assets/sliding_background.gdshader" id="2_vy6tx"]
+[ext_resource type="Texture2D" uid="uid://bnly1gkbxw6b5" path="res://assets/bubble_pattern.png" id="3_wqafu"]
+[ext_resource type="Texture2D" uid="uid://copkt78vgp37i" path="res://assets/sophia.png" id="4_0kmxd"]
+[ext_resource type="Texture2D" uid="uid://d000xjtr4iqtk" path="res://assets/emotion_regular.png" id="5_lqe7u"]
+[ext_resource type="Script" path="res://lessons/NextButton.gd" id="7_y0v5a"]
+[ext_resource type="AudioStream" uid="uid://cseobttqx0tih" path="res://assets/sfx/E.mp3" id="8_22q3a"]
+[ext_resource type="AudioStream" uid="uid://coqq86860tgo8" path="res://assets/sfx/21-cardboard1.wav" id="9_attpu"]
+[ext_resource type="AudioStream" uid="uid://c0xk1ycbn8hpk" path="res://assets/sfx/G#.mp3" id="9_bmbyq"]
+[ext_resource type="AudioStream" uid="uid://y2ih0d1gyc32" path="res://assets/sfx/B.mp3" id="9_kf37w"]
+[ext_resource type="AudioStream" uid="uid://bf0wwl4yq44u2" path="res://assets/sfx/D#.mp3" id="10_pf3k5"]
+[ext_resource type="AudioStream" uid="uid://dw2nss4jdlxfy" path="res://assets/sfx/High E.mp3" id="11_3tju6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xw5kj"]
+shader = ExtResource("2_vy6tx")
+shader_parameter/bg_color = Color(0.490196, 0.776471, 0.768627, 1)
+shader_parameter/pattern_color = Color(0.266667, 0.603922, 0.639216, 1)
+shader_parameter/pattern_size = 256.0
+shader_parameter/pattern_sampler = ExtResource("3_wqafu")
 
 [node name="Dialogue" type="Control"]
 layout_mode = 3
@@ -10,34 +28,99 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_7nwt5")
 script = ExtResource("1_bed18")
+metadata/_edit_vertical_guides_ = [1920.0, 1680.0]
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xw5kj")
 layout_mode = 1
-anchors_preset = -1
-offset_right = 960.0
-offset_bottom = 540.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_7u0au")
-expand_mode = 1
-metadata/_edit_group_ = true
-metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="Body" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
+anchor_top = 0.014
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 194.0
+offset_top = 359.88
+offset_right = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0kmxd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Expression" type="TextureRect" parent="Body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_lqe7u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.399
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 58.92
+offset_top = 462.0
+offset_right = -240.0
+offset_bottom = -281.0
+theme = ExtResource("1_7nwt5")
+text = "Hello, world!"
+fit_content = true
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -960.0
-offset_top = -540.0
-offset_right = 0.00012207
-offset_bottom = 0.00012207
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_7u0au")
-expand_mode = 1
-metadata/_edit_group_ = true
-metadata/_edit_use_anchors_ = true
+offset_left = -444.0
+offset_top = -235.0
+offset_right = -240.0
+offset_bottom = -99.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_7nwt5")
+theme_override_font_sizes/font_size = 64
+text = "Next
+"
+script = ExtResource("7_y0v5a")
+
+[node name="ButtonHoverSound" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("8_22q3a")
+volume_db = -5.0
+
+[node name="ButtonMouseExitedSound" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("9_attpu")
+volume_db = 10.0
+pitch_scale = 0.8
+
+[node name="ButtonDownSound" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("9_bmbyq")
+volume_db = -5.0
+
+[node name="ButtonUpSound" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("9_kf37w")
+volume_db = -5.0
+
+[node name="ButtonUpSound2" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("10_pf3k5")
+volume_db = -5.0
+
+[node name="ButtonUpSound3" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("11_3tju6")
+volume_db = -5.0
