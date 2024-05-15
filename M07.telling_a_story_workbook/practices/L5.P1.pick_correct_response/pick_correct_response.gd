@@ -10,7 +10,7 @@ var items: Array[String] = [
 	"Nature doesn't have a code review process.",
 ]
 # change this to point at the correct item: "It has too many bugs!"
-var item_index := 0
+var item_index := 2
 
 func _ready() -> void:
 	show_text()

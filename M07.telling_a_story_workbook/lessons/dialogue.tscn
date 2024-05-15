@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://kras5m3ptiwj"]
+[gd_scene load_steps=19 format=3 uid="uid://cqem7737kb65n"]
 
 [ext_resource type="Theme" uid="uid://bhk78dvw2v8ao" path="res://lessons/main_theme.tres" id="1_7nwt5"]
 [ext_resource type="Script" path="res://lessons/dialogue.gd" id="1_bed18"]
@@ -10,9 +10,13 @@
 [ext_resource type="AudioStream" uid="uid://cseobttqx0tih" path="res://assets/sfx/E.mp3" id="8_22q3a"]
 [ext_resource type="AudioStream" uid="uid://coqq86860tgo8" path="res://assets/sfx/21-cardboard1.wav" id="9_attpu"]
 [ext_resource type="AudioStream" uid="uid://c0xk1ycbn8hpk" path="res://assets/sfx/G#.mp3" id="9_bmbyq"]
+[ext_resource type="AudioStream" uid="uid://l7fvv887b5rx" path="res://assets/sfx/F#.mp3" id="9_em8r5"]
 [ext_resource type="AudioStream" uid="uid://y2ih0d1gyc32" path="res://assets/sfx/B.mp3" id="9_kf37w"]
 [ext_resource type="AudioStream" uid="uid://bf0wwl4yq44u2" path="res://assets/sfx/D#.mp3" id="10_pf3k5"]
 [ext_resource type="AudioStream" uid="uid://dw2nss4jdlxfy" path="res://assets/sfx/High E.mp3" id="11_3tju6"]
+[ext_resource type="AudioStream" uid="uid://b73m4k5vitwf5" path="res://assets/sfx/A.mp3" id="12_mn22p"]
+[ext_resource type="AudioStream" uid="uid://cyca63fejw45x" path="res://assets/sfx/C#.mp3" id="14_gbxol"]
+[ext_resource type="AudioStream" uid="uid://ocbvkjojotgm" path="res://assets/talking_synth.mp3" id="17_c84cg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xw5kj"]
 shader = ExtResource("2_vy6tx")
@@ -68,20 +72,22 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.399
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 58.92
-offset_top = 462.0
+offset_top = 375.0
 offset_right = -240.0
-offset_bottom = -281.0
+offset_bottom = -540.0
 theme = ExtResource("1_7nwt5")
 text = "Hello, world!"
 fit_content = true
 
 [node name="NextButton" type="Button" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -89,9 +95,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -444.0
-offset_top = -235.0
+offset_top = -165.0
 offset_right = -240.0
-offset_bottom = -99.0
+offset_bottom = -29.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("1_7nwt5")
@@ -101,8 +107,9 @@ text = "Next
 script = ExtResource("7_y0v5a")
 
 [node name="ButtonHoverSound" type="AudioStreamPlayer" parent="NextButton"]
-stream = ExtResource("8_22q3a")
-volume_db = -5.0
+stream = ExtResource("9_attpu")
+volume_db = 10.0
+pitch_scale = 1.2
 
 [node name="ButtonMouseExitedSound" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("9_attpu")
@@ -110,17 +117,50 @@ volume_db = 10.0
 pitch_scale = 0.8
 
 [node name="ButtonDownSound" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("9_attpu")
+volume_db = 10.0
+pitch_scale = 2.0
+
+[node name="ButtonUpSound" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("9_attpu")
+volume_db = 10.0
+
+[node name="Do" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("8_22q3a")
+volume_db = -5.0
+
+[node name="Re" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("9_em8r5")
+volume_db = -5.0
+
+[node name="Mi" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("9_bmbyq")
 volume_db = -5.0
 
-[node name="ButtonUpSound" type="AudioStreamPlayer" parent="NextButton"]
+[node name="Fa" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("12_mn22p")
+volume_db = -5.0
+
+[node name="So" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("9_kf37w")
 volume_db = -5.0
 
-[node name="ButtonUpSound2" type="AudioStreamPlayer" parent="NextButton"]
+[node name="La" type="AudioStreamPlayer" parent="NextButton"]
+stream = ExtResource("14_gbxol")
+volume_db = -5.0
+
+[node name="Ti" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("10_pf3k5")
 volume_db = -5.0
 
-[node name="ButtonUpSound3" type="AudioStreamPlayer" parent="NextButton"]
+[node name="High Do" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("11_3tju6")
 volume_db = -5.0
+
+[node name="TalkingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_c84cg")
+volume_db = -4.0
+pitch_scale = 2.0
+
+[node name="TalkingTimer" type="Timer" parent="."]
+one_shot = true
