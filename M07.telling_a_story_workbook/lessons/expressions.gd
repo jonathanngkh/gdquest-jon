@@ -27,33 +27,45 @@ var characters: Dictionary = {
 func _ready() -> void:
 	body.texture = characters["pink"]
 	expression.texture = expressions["happy"]
-	button_pink.pressed.connect(_on_button_pink_pressed)
-	button_sofia.pressed.connect(_on_button_sofia_pressed)
-	button_happy.pressed.connect(_on_button_happy_pressed)
-	button_angry.pressed.connect(_on_button_angry_pressed)
-	button_sad.pressed.connect(_on_button_sad_pressed)
-	button_regular.pressed.connect(_on_button_regular_pressed)
+	button_pink.pressed.connect(func() -> void:
+		body.texture = characters["pink"])
+	button_sofia.pressed.connect(func() -> void:
+		body.texture = characters["sofia"])
+	button_happy.pressed.connect(func() -> void:
+		expression.texture = expressions["happy"])
+	button_angry.pressed.connect(func() -> void:
+		expression.texture = expressions["angry"])
+	button_sad.pressed.connect(func() -> void:
+		expression.texture = expressions["sad"])
+	button_regular.pressed.connect(func() -> void:
+		expression.texture = expressions["regular"])
+	#button_pink.pressed.connect(_on_button_pink_pressed)
+	#button_sofia.pressed.connect(_on_button_sofia_pressed)
+	#button_happy.pressed.connect(_on_button_happy_pressed)
+	#button_angry.pressed.connect(_on_button_angry_pressed)
+	#button_sad.pressed.connect(_on_button_sad_pressed)
+	#button_regular.pressed.connect(_on_button_regular_pressed)
 
 
-func _on_button_pink_pressed() -> void:
-	body.texture = characters["pink"]
-
-
-func _on_button_sofia_pressed() -> void:
-	body.texture = characters["sofia"]
-
-
-func _on_button_happy_pressed() -> void:
-	expression.texture = expressions["happy"]
-
-
-func _on_button_sad_pressed() -> void:
-	expression.texture = expressions["sad"]
-
-
-func _on_button_regular_pressed() -> void:
-	expression.texture = expressions["regular"]
-
-
-func _on_button_angry_pressed() -> void:
-	expression.texture = expressions["angry"]
+#func _on_button_pink_pressed() -> void:
+	#body.texture = characters["pink"]
+#
+#
+#func _on_button_sofia_pressed() -> void:
+	#body.texture = characters["sofia"]
+#
+#
+#func _on_button_happy_pressed() -> void:
+	#expression.texture = expressions["happy"]
+#
+#
+#func _on_button_sad_pressed() -> void:
+	#expression.texture = expressions["sad"]
+#
+#
+#func _on_button_regular_pressed() -> void:
+	#expression.texture = expressions["regular"]
+#
+#
+#func _on_button_angry_pressed() -> void:
+	#expression.texture = expressions["angry"]
