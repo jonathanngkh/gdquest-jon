@@ -1,13 +1,9 @@
 extends Control
 
-@onready var button_sofia: Button = %ButtonSofia
-@onready var button_pink: Button = %ButtonPink
-@onready var button_regular: Button = %ButtonRegular
-@onready var button_happy: Button = %ButtonHappy
-@onready var button_sad: Button = %ButtonSad
-@onready var button_angry: Button = %ButtonAngry
-@onready var body: TextureRect = $Body
-@onready var expression: TextureRect = $Body/Expression
+@onready var body: TextureRect = %Body
+@onready var expression: TextureRect = %Expression
+@onready var row_characters: HBoxContainer = %RowCharacters
+@onready var row_expressions: HBoxContainer = %RowExpressions
 
 var expressions: Dictionary = {
 	"regular" = preload("res://assets/emotion_regular.png"),
@@ -16,29 +12,49 @@ var expressions: Dictionary = {
 	"sad" = preload("res://assets/emotion_sad.png")
 }
 
-
 var characters: Dictionary = {
 	"pink" = preload("res://assets/pink.png"),
 	"sofia" = preload("res://assets/sophia.png")
 }
+
+func create_button(from_dictionary, dictionary_key) -> void:
+	var button := Button.new()
+	if from_dictionary == characters:
+		row_characters.add_child(button)
+	elif from_dictionary == expressions:
+		row_expressions.add_child(button)
+	var key = dictionary_key
+	button.text = key.capitalize()
+	button.pressed.connect(func() -> void:
+		if from_dictionary == characters:
+			body.texture = characters[key]
+		elif from_dictionary == expressions:
+			expression.texture = expressions[key]
+	)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body.texture = characters["pink"]
 	expression.texture = expressions["happy"]
-	button_pink.pressed.connect(func() -> void:
-		body.texture = characters["pink"])
-	button_sofia.pressed.connect(func() -> void:
-		body.texture = characters["sofia"])
-	button_happy.pressed.connect(func() -> void:
-		expression.texture = expressions["happy"])
-	button_angry.pressed.connect(func() -> void:
-		expression.texture = expressions["angry"])
-	button_sad.pressed.connect(func() -> void:
-		expression.texture = expressions["sad"])
-	button_regular.pressed.connect(func() -> void:
-		expression.texture = expressions["regular"])
+	for character:String in characters:
+		create_button(characters, character)
+	for expression:String in expressions:
+		create_button(expressions, expression)
+	
+	#button_pink.pressed.connect(func() -> void:
+		#body.texture = characters["pink"])
+	#button_sofia.pressed.connect(func() -> void:
+		#body.texture = characters["sofia"])
+	#button_happy.pressed.connect(func() -> void:
+		#expression.texture = expressions["happy"])
+	#button_angry.pressed.connect(func() -> void:
+		#expression.texture = expressions["angry"])
+	#button_sad.pressed.connect(func() -> void:
+		#expression.texture = expressions["sad"])
+	#button_regular.pressed.connect(func() -> void:
+		#expression.texture = expressions["regular"])
+		
 	#button_pink.pressed.connect(_on_button_pink_pressed)
 	#button_sofia.pressed.connect(_on_button_sofia_pressed)
 	#button_happy.pressed.connect(_on_button_happy_pressed)
