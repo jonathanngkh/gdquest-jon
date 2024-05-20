@@ -46,6 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Body" type="TextureRect" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.014
@@ -56,11 +57,13 @@ offset_top = 359.88
 offset_right = -194.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(286, 705)
 texture = ExtResource("4_0kmxd")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Expression" type="TextureRect" parent="Body"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,39 +130,39 @@ volume_db = 10.0
 
 [node name="Do" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("8_22q3a")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="Re" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("9_em8r5")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="Mi" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("9_bmbyq")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="Fa" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("12_mn22p")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="So" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("9_kf37w")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="La" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("14_gbxol")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="Ti" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("10_pf3k5")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="High Do" type="AudioStreamPlayer" parent="NextButton"]
 stream = ExtResource("11_3tju6")
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="TalkingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_c84cg")
-volume_db = -4.0
+volume_db = -7.0
 pitch_scale = 2.0
 
 [node name="TalkingTimer" type="Timer" parent="."]
