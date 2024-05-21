@@ -16,55 +16,79 @@ var expressions: Dictionary = {
 	"euphoric" = preload("res://assets/emotion_euphoric.png"),
 }
 
+var characters: Dictionary = {
+	"pink" = preload("res://assets/pink.png"),
+	"sofia" = preload("res://assets/sophia.png")
+}
+
 var dialogue_items: Array[Dictionary] = [
 	{"text": "Harmonious Hellos!",
-	"expression": expressions["regular"]},
+	"expression": expressions["regular"],
+	"character": characters["sofia"]},
 	
 	{"text": "I'm Sofia.",
-	"expression" : expressions["happy"]},
+	"expression" : expressions["happy"],
+	"character": characters["sofia"]},
 	
 	{"text": "I'll be your scales practice coach.",
-	"expression" : expressions["regular"]},
+	"expression" : expressions["regular"],
+	"character": characters["sofia"]},
 	
-	{"text": "Some people find practicing scales bothersome...",
-	"expression" : expressions["sad"]},
+	{"text": "But I prefer playing pieces!",
+	"expression" : expressions["angry"],
+	"character": characters["pink"]},
+	
+	{"text": "Some people find practicing scales boring...",
+	"expression" : expressions["sad"],
+	"character": characters["sofia"]},
 	
 	{"text": "But I love scales!",
-	"expression": expressions["happy"]},
+	"expression": expressions["happy"],
+	"character": characters["sofia"]},
 	
 	{"text": "Let's practice together.",
-	"expression": expressions["determined"]},
+	"expression": expressions["determined"],
+	"character": characters["sofia"]},
 	
 	{"text": "Do...",
-	"expression": expressions["regular"]},
+	"expression": expressions["regular"],
+	"character": characters["sofia"]},
 	
 	{"text": "Re...",
-	"expression": expressions["euphoric"]},
+	"expression": expressions["euphoric"],
+	"character": characters["pink"]},
 	
 	{"text": "Mi...",
-	"expression": expressions["sad"]},
+	"expression": expressions["sad"],
+	"character": characters["sofia"]},
 	
 	{"text": "Fa...",
-	"expression": expressions["happy"]},
+	"expression": expressions["happy"],
+	"character": characters["pink"]},
 	
 	{"text": "So...",
-	"expression": expressions["regular"]},
+	"expression": expressions["regular"],
+	"character": characters["sofia"]},
 	
 	{"text": "So... f...",
-	"expression": expressions["angry"]},
+	"expression": expressions["angry"],
+	"character": characters["sofia"]},
 	
 	{"text": "So... fu...",
-	"expression": expressions["determined"]},
+	"expression": expressions["determined"],
+	"character": characters["sofia"]},
 	
 	{"text": "So... fun!",
-	"expression": expressions["happy"]},
+	"expression": expressions["happy"],
+	"character": characters["pink"]},
 ]
 
+@export var sofia_pitch_scale := 1.5
+@export var pink_pitch_scale := 0.9
 var seconds_per_character := 0.6/18.0
 var current_index: int = 0
 var current_item: Dictionary = dialogue_items[current_index]
-var current_text: String = current_item["text"]
-var text_appearing_duration: float = current_text.length() * seconds_per_character
+var text_appearing_duration: float = current_item["text"].length() * seconds_per_character
 var talking_playback_position := 0.0
 
 func _ready() -> void:
@@ -73,33 +97,62 @@ func _ready() -> void:
 	talk()
 	show_text()
 
+
 func talk() -> void:
-	text_appearing_duration = float(current_text.length()) * seconds_per_character
+	text_appearing_duration = float(current_item["text"].length()) * seconds_per_character
 	talking_timer.wait_time = text_appearing_duration
+	if current_item["character"] == characters["sofia"]:
+		talking_sound.pitch_scale = sofia_pitch_scale
+	elif current_item["character"] == characters["pink"]:
+		talking_sound.pitch_scale = pink_pitch_scale
 	talking_sound.play(talking_playback_position)
 	talking_timer.start()
+	next_button.disabled = true
+	next_button.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 
 
 func _on_talking_timer_timeout() -> void:
 	talking_playback_position = talking_sound.get_playback_position()
 	talking_sound.stop()
+	next_button.disabled = false
+	next_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	$NextButton/ButtonUpSound.play()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("advance_button"):
+		if next_button.disabled == false:
+			$NextButton/ButtonDownSound.play()
+			next_button.button_pressed = true
+	if event.is_action_just_released("advance_button"):
+		if next_button.disabled == false:
+			_on_button_pressed()
 
 
 func _on_button_pressed() -> void:
 	play_scale()
 	advance_dialogue()
 	slide_in()
+	$NextButton/ButtonUpSound.play()
+	next_button.button_pressed = false
+	next_button.release_focus()
 
 
 func show_text() -> void:
-	current_item = dialogue_items[current_index]
-	current_text = current_item["text"]
-	rich_text_label.text = current_text
-	expression.texture = current_item["expression"]
+	set_text_expression_character()
 	talk()
+	tween_text()
+	
+func tween_text() -> void:
 	var tween = create_tween()
 	tween.tween_property(rich_text_label, "visible_ratio", 1, text_appearing_duration).from(0.0)
 
+
+func set_text_expression_character() -> void:
+	current_item = dialogue_items[current_index]
+	rich_text_label.text = current_item["text"]
+	expression.texture = current_item["expression"]
+	body.texture = current_item["character"]
 
 func advance_dialogue() -> void:
 	if current_index + 1 < dialogue_items.size():
@@ -114,32 +167,28 @@ func slide_in() -> void:
 	tween.tween_property(body, "position:x", 194, 0.5).from(400)
 	
 	tween = create_tween()
-	#tween.set_ease(Tween.EASE_IN)
-	#tween.set_trans(Tween.TRANS_QUINT)
 	tween.tween_property(body, "modulate:a", 1.0, 0.2).from(0.0)
 	
 	tween = create_tween()
-	#tween.set_ease(Tween.EASE_IN_OUT)
-	#tween.set_trans(Tween.TRANS_ELASTIC)
-	tween.tween_property(body, "scale:y", 0.9, 0.1).from(1.0)
-	tween.tween_property(body, "scale:y", 1.0, 0.1).from(0.9)
+	tween.tween_property(body, "scale:y", 0.95, 0.1).from(1.0)
+	tween.tween_property(body, "scale:y", 1.0, 0.1).from(0.95)
 
 func play_scale() -> void:
-	if current_text == "Let's practice together.":
+	if current_item["text"] == "Let's practice together.":
 		$NextButton/Do.play()
-	if current_text == "Do...":
+	if current_item["text"] == "Do...":
 		$NextButton/Re.play()
-	if current_text == "Re...":
+	if current_item["text"] == "Re...":
 		$NextButton/Mi.play()
-	if current_text == "Mi...":
+	if current_item["text"] == "Mi...":
 		$NextButton/Fa.play()
-	if current_text == "Fa...":
+	if current_item["text"] == "Fa...":
 		$NextButton/So.play()
-	if current_text == "So...":
+	if current_item["text"] == "So...":
 		$NextButton/La.play()
-	if current_text == "So... f...":
+	if current_item["text"] == "So... f...":
 		$NextButton/Ti.play()
-	if current_text == "So... fu...":
+	if current_item["text"] == "So... fu...":
 		$NextButton/Mi.play()
 		$NextButton/So.play()
 		$"NextButton/High Do".play()

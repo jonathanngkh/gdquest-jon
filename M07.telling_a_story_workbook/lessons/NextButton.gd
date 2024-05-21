@@ -12,7 +12,7 @@ func _ready() -> void:
 	mouse_entered.connect(_on_button_mouse_entered)
 	mouse_exited.connect(_on_button_mouse_exited)
 	button_down.connect(_on_button_button_down)
-	button_up.connect(_on_button_button_up)
+	#button_up.connect(_on_button_button_up)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,6 +34,6 @@ func _on_button_button_down():
 	button_down_sound.play()
 
 
-func _on_button_button_up():
-	if is_mouse_hovering:
-		button_up_sound.play()
+#func _on_button_button_up():
+	#if is_mouse_hovering:
+		#button_up_sound.play()
