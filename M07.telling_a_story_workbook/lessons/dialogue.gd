@@ -22,7 +22,7 @@ var characters: Dictionary = {
 }
 
 var dialogue_items: Array[Dictionary] = [
-	{"text": "Harmonious Hellos!",
+	{"text": "[b]Harmonious[/b] Hellos!",
 	"expression": expressions["regular"],
 	"character": characters["sofia"]},
 	
@@ -124,7 +124,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if next_button.disabled == false:
 			$NextButton/ButtonDownSound.play()
 			next_button.button_pressed = true
-	if event.is_action_just_released("advance_button"):
+	if event.is_action_released("advance_button"):
 		if next_button.disabled == false:
 			_on_button_pressed()
 

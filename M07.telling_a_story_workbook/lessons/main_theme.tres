@@ -1,9 +1,8 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bhk78dvw2v8ao"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bhk78dvw2v8ao"]
 
 [ext_resource type="StyleBox" uid="uid://dbki0od6bppf7" path="res://lessons/hover_style_box_flat.tres" id="1_c555d"]
 [ext_resource type="StyleBox" uid="uid://dkymnk5x7l8ct" path="res://lessons/normal_style_box_flat.tres" id="2_u5dih"]
 [ext_resource type="StyleBox" uid="uid://jbymowip3hm3" path="res://lessons/pressed_style_box_flat.tres" id="3_ncs1c"]
-[ext_resource type="FontFile" uid="uid://btiybsu6acuy7" path="res://addons/gdpractice/assets/fonts/Montserrat-Bold.ttf" id="4_xkvdg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncial"]
 bg_color = Color(0.309804, 0.309804, 0.309804, 0.509804)
@@ -32,7 +31,6 @@ corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 
 [resource]
-default_font = ExtResource("4_xkvdg")
 default_font_size = 72
 Button/styles/disabled = SubResource("StyleBoxFlat_ncial")
 Button/styles/focus = SubResource("StyleBoxEmpty_o67dh")
